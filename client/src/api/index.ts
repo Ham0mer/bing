@@ -13,7 +13,6 @@ const getList = (params: {
 		},
 	}).then((response) => response.data)
 }
-
 const getInfo = (params: { id: number }) => {
 	return http({
 		method: 'get',

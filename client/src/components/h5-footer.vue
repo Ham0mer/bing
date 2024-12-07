@@ -31,12 +31,12 @@ state.compileTime = dayjs(versionJSON.compileTime).format('YYYY-MM-DD HH:mm:ss')
 			<a
 				class="link-item"
 				target="_blank"
-				href="https://github.com/androidmumo/bing"
+				href="https://github.com/"
 			>
 				<i-mdi:github class="link-item-icon" />GitHub
 			</a>
 		</div>
-		<div class="copyright">Copyright © 2022 mcloc.cn</div>
+		<div class="copyright">Copyright © 2023 qwq.gs</div>
 		<div class="build-time">
 			{{ `${t('footer.buildTime')}: ${state.compileTime}` }}
 		</div>

@@ -32,7 +32,7 @@ state.compileTime = dayjs(versionJSON.compileTime).format('YYYY-MM-DD HH:mm:ss')
 			<a
 				class="link-item"
 				target="_blank"
-				href="https://github.com/androidmumo/bing"
+				href="https://github.com/"
 			>
 				<i-mdi:github class="link-item-icon" />GitHub
 			</a>
