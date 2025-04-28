@@ -10,7 +10,7 @@ const { baseConfig } = require("./data/config");
 const { port, DelayTime, key } = baseConfig;
 const { dir } = installConfig;
 const { static } = apiBaseConfig;
-const { UPDATE, DELETE, GET_IMAGE, GET_LIST, GET_INFO, GET_WEBINFO } = apiConfig;
+const { UPDATE, DELETE, GET_IMAGE, GET_LIST, GET_INFO, GET_WEBINFO, GET_BING, GET_RANDOM_INFO } = apiConfig;
 
 // 导入模块
 const { logger } = require("./model/log4js"); // 日志模块
@@ -31,6 +31,7 @@ const cors = require("cors");
 const { getList } = require("./api/getList");
 const { getInfo } = require("./api/getInfo");
 const { getWebInfo } = require("./api/getWebInfo");
+const { getRandomInfo } = require("./api/getRandomInfo");
 
 // 使用express框架
 const express = require("express");
@@ -114,7 +115,17 @@ const getImage = (req, res) => {
   const fileDir = `${saveDir}/${afterDelayTime.format("YYYY-MM-DD")}_hd.jpg`;
   res.sendFile(process.cwd() + "/" + fileDir);
 }
-
+const getBing = (req, res) => {
+  const startDate = dayjs('2023-11-03');
+  const today = dayjs();
+  const randomDate = dayjs(startDate).add(Math.floor(Math.random() * today.diff(startDate, 'day')), 'day');
+  
+  const saveDir = `${dir}/${randomDate.format("YYYY")}/${randomDate.format(
+    "MM"
+  )}/${randomDate.format("DD")}`;
+  const fileDir = `${saveDir}/${randomDate.format("YYYY-MM-DD")}_hd.jpg`;
+  res.sendFile(process.cwd() + "/" + fileDir);
+}
 // 网页
 app.get('/', (req, res) => {
   res.sendfile(`${distPath}/index.html`);
@@ -124,6 +135,8 @@ app.get(`/${GET_IMAGE}`, getImage); // 获取当天图片
 app.get(`/${GET_LIST}`, getList); // 获取图片列表
 app.get(`/${GET_INFO}`, getInfo); // 获取图片详情
 app.get(`/${GET_WEBINFO}`, getWebInfo); // 获取网站信息
+app.get(`/${GET_BING}`, getBing); // 获取随机图片
+app.get(`/${GET_RANDOM_INFO}`, getRandomInfo); // 获取随机数据信息
 // ------ 接口 end------
 
 // 开始监听
