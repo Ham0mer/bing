@@ -10,7 +10,7 @@ interface Props {
 }
 const props = withDefaults(defineProps<Props>(), {
 	showInfoText: true,
-	autoLoad: false,
+	autoLoad: true,
 })
 
 const state = reactive({
