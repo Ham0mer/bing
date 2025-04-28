@@ -10,6 +10,8 @@
 name: Publish Docker image
 
 on:
+  push:
+    branches: [ main ]  # 可以根据需要修改分支名
   release:
     types: [published]
 
