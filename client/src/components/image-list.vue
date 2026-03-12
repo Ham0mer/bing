@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const state = reactive({
 	loadMap: {}, // 图片加载状态
-	loadCount: 0, // 加载次数
+	loadCount: 2, // 加载次数 3-loadCount 为实际加载次数
 }) as UnwrapNestedRefs<any>
 
 const imageList = ref()
