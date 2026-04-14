@@ -1,52 +1,79 @@
+# 必应每日一图
+
 <div align="center">
-  <h1>必应每日一图</h1>
-  <p>每天更新一张图片（来源：必应）。诗曰：沉舟侧畔千帆过。一起来领略世界之美吧！</p>
-  <p>DEMO: https://QWQ.GS</p>
+<img src="https://img.shields.io/badge/Docker-Supported-blue?logo=docker&logoColor=white" alt="Docker Supported">
+<img src="https://img.shields.io/badge/License-MIT-green" alt="License">
+<img src="https://img.shields.io/badge/Demo-QWQ.GS-orange" alt="Demo">
 </div>
 
+<br>
 
+<div align="center">
+<p><b>沉舟侧畔千帆过，病树前头万木春。</b></p>
+<p>每天自动同步必应搜索的高质量壁纸，带你领略世界之美。</p>
+<a href="https://QWQ.GS"><strong>查看演示 (DEMO) »</strong></a>
+</div>
 
-## 1.特点
+-----
 
- - 必应搜索每天会更新一张高质量的图片，用来做壁纸再好不过了，每天都有新心情。
- - 这本项目有前后端，支持回溯，可以获取这几种处理后的图：缩略图、高斯模糊、灰度，同时有HD、UHD。
- - 为了配合[Pmage](https://github.com/androidmumo/pmage)使用，接口还会返回base64格式的极小缩略图。
- - 服务端还会提取图片的主要颜色，以使前端使用这些主要颜色渲染漂亮的页面。
+## ✨ 项目特点
 
-## 2.Docker部署
+  * **全自动更新**：每日定时同步必应搜索封面，让你的壁纸每天都有新心情。
+  * **全栈支持**：自带精美的前后端实现，支持历史图片回溯查看。
+  * **多维度处理**：
+      * **画质丰富**：支持 **HD** 与 **UHD** 超清解析。
+      * **特效接口**：支持实时生成 **缩略图**、**高斯模糊**、**灰度图**。
+      * **极致优化**：专为 [Pmage](https://www.google.com/search?q=https://github.com/androidmumo/pmage) 优化，提供 Base64 极小缩略图。
+  * **智能配色**：服务端自动提取图片 **主色调**，前端可根据颜色自动适配 UI，视觉更和谐。
 
-本项目提供了Docker版本。现在，您无需关注前后端如何部署。只需要简单的启动Docker镜像，即可拥有完全由您自己控制的服务。
-docker镜像: `ghcr.io/ham0mer/bing:main`
+-----
 
-### 2.1创建目录&下载配置
+## 🚀 Docker 快速部署
 
- `/opt`目录下创建`bing`目录。用于存储项目数据。
- 根目录执行以下命令：
-  ```bash
-  mkdir -p /opt/bing
-  cd /opt/bing
-  wget -O config.js https://raw.githubusercontent.com/Ham0mer/bing/refs/heads/main/server/data/config-full.js
-  ```
-  将`config.js`文件中的配置项填写好，保存。
- 
+使用 Docker 部署，你无需关心环境配置，只需一行命令即可拥有属于自己的镜像服务。
 
-### 2.2下载Docker Compose文件
+> **镜像地址**：`ghcr.io/ham0mer/bing:main`
 
- `/opt/bing`目录下执行以下命令：
-  ```bash
-  wget -O docker-compose.yml https://raw.githubusercontent.com/Ham0mer/bing/refs/heads/main/docker-compose.yml
-  ```
-  启动Docker Compose服务：
-  ```bash
-  docker compose up -d && docker compose logs -f -t
-  ```
- 在容器启动时，程序会自动拉取当天图片并进行处理，这时您看到的页面可能是空的。别急，只要稍等片刻(依据您的服务器性能而定)，图片便会处理完毕，刷新页面即可看到当天图片。
+### 1\. 环境准备
 
+在 `/opt` 目录下创建项目文件夹并下载配置文件：
 
+```bash
+mkdir -p /opt/bing && cd /opt/bing
 
-## 3.其他文档
+# 下载完整配置文件
+wget -O config.js https://raw.githubusercontent.com/Ham0mer/bing/refs/heads/main/server/data/config-full.js
+```
 
-### 3.1.[服务端文档](./server/README.md)
+> [\!TIP]
+> 请在启动前编辑 `config.js`，根据你的实际需求填写配置项。
 
-### 3.2.[前端文档](./client/README.md)
+### 2\. 编排与启动
 
+下载 `docker-compose.yml` 并启动服务：
+
+```bash
+# 下载编排文件
+wget -O docker-compose.yml https://raw.githubusercontent.com/Ham0mer/bing/refs/heads/main/docker-compose.yml
+
+# 启动服务并查看日志
+docker compose up -d && docker compose logs -f -t
+```
+
+> [\!NOTE]
+> **首次启动提示**：程序启动时会自动拉取并处理当天图片。如果页面暂时空白，请稍等片刻，待处理完成后刷新即可。
+
+-----
+
+## 📖 更多文档
+
+| 文档类型 | 链接地址 |
+| :--- | :--- |
+| **服务端 (Backend)** | [进入查看](./server/README.md) |
+| **前端 (Frontend)** | [进入查看](./client/README.md) |
+
+-----
+
+<div align="center">
+<sub>Built with ❤️ by Ham0mer</sub>
+</div>
