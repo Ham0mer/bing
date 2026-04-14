@@ -1,0 +1,22 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 error pnpm": {
+    "code": "ERR_PNPM_UNSUPPORTED_ENGINE",
+    "packageId": "/Users/majunjie/my/personal/bing/client",
+    "wanted": {
+      "node": ">=14"
+    },
+    "current": {
+      "node": "v12.20.2",
+      "pnpm": "6.32.23"
+    },
+    "err": {
+      "name": "pnpm",
+      "message": "Unsupported engine for /Users/majunjie/my/personal/bing/client: wanted: {\"node\":\">=14\"} (current: {\"node\":\"v12.20.2\",\"pnpm\":\"6.32.23\"})",
+      "code": "ERR_PNPM_UNSUPPORTED_ENGINE",
+      "stack": "pnpm: Unsupported engine for /Users/majunjie/my/personal/bing/client: wanted: {\"node\":\">=14\"} (current: {\"node\":\"v12.20.2\",\"pnpm\":\"6.32.23\"})\n    at checkEngine (/Users/majunjie/.nvm/versions/node/v12.20.2/lib/node_modules/pnpm/dist/pnpm.cjs:41467:16)\n    at checkPackage (/Users/majunjie/.nvm/versions/node/v12.20.2/lib/node_modules/pnpm/dist/pnpm.cjs:43563:104)\n    at packageIsInstallable (/Users/majunjie/.nvm/versions/node/v12.20.2/lib/node_modules/pnpm/dist/pnpm.cjs:43587:61)\n    at tryReadProjectManifest (/Users/majunjie/.nvm/versions/node/v12.20.2/lib/node_modules/pnpm/dist/pnpm.cjs:43919:55)\n    at async handler (/Users/majunjie/.nvm/versions/node/v12.20.2/lib/node_modules/pnpm/dist/pnpm.cjs:123946:48)\n    at async /Users/majunjie/.nvm/versions/node/v12.20.2/lib/node_modules/pnpm/dist/pnpm.cjs:186827:21\n    at async run (/Users/majunjie/.nvm/versions/node/v12.20.2/lib/node_modules/pnpm/dist/pnpm.cjs:186801:34)\n    at async runPnpm (/Users/majunjie/.nvm/versions/node/v12.20.2/lib/node_modules/pnpm/dist/pnpm.cjs:187020:5)\n    at async /Users/majunjie/.nvm/versions/node/v12.20.2/lib/node_modules/pnpm/dist/pnpm.cjs:187012:7"
+    }
+  }
+}
