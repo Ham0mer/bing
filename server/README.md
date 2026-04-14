@@ -48,21 +48,18 @@ const databaseConfig = {
 const infoConfig = {
   link: [
     {
-      label: "白馬空谷的主页", // 链接名称
-      url: "https://www.mcloc.cn/" // 链接地址
+      label: "必应每日一图", // 链接名称
+      url: "https://bing.com/" // 链接地址
     },
     {
-      label: "白馬空谷的博客",
-      url: "https://blog.mcloc.cn/"
+      label: "必应每日一图",
+      url: "https://bing.com/"
     }
   ],
+  copyright: `Copyright © 2020-2026`, // 版权信息
   htmlSlot: {
     beforeFooter: ``, // 页脚上方HTML插槽
-    afterFooter: `<a style="margin-right: 10px;" target="_blank" href="https://beian.miit.gov.cn/">晋ICP备20001086号-1</a>
-  <a style="margin-right: 10px; display: flex; align-items: center;" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41080202000141">
-    <img style="width: 14px; margin-right: 6px;" src="https://www.mcloc.cn/wp-content/uploads/2020/04/beiantubiao-19.png"/>
-    <span>豫公网安备 41080202000141号</span>
-  </a>` // 页脚下方HTML插槽
+    afterFooter: `` // 页脚下方HTML插槽
   }
 }
 
@@ -88,22 +85,27 @@ module.exports = {
 
 // 安装配置
 const installConfig = {
-  dir: "data/resources", // 图片在服务端的真实保存路径 (相对于根目录、首尾不能为’/‘)
-  databaseTable: "bing", // 数据库表名 (可在安装前更改)
+  databaseVersion: 1,
+  dir: "data/resources", // 图片在服务端的真实保存路径 (相对于根目录、首尾不能为'/'')
+  databaseTable: "bing", // 数据库表名-数据 (可在安装前更改)
+  databaseTableInfo: "info", // 数据库表名-信息 (可在安装前更改)
 }
 
 // API基础配置
 const apiBaseConfig = {
-  static: "img", // 图片静态托管路径 (url访问图片时的路径、首尾不能为’/‘)
+  static: "img", // 图片静态托管路径 (url访问图片时的路径、首尾不能为'/'')
 }
 
-// API接口路径配置(接口url后缀、首尾不能为’/‘)
+// API接口后缀配置(接口url后缀、首尾不能为'/'')
 const apiConfig = {
-  UPDATE: "api/update", // 手动更新图片（访问需要key鉴权）
-  DELETE: "api/delete", // 手动清理图片（访问需要key鉴权）
+  UPDATE: "api/update", // 手动更新图片（需要key）
+  DELETE: "api/delete", // 手动清理图片（需要key）
   GET_IMAGE: "api/getImage", // 获取当天图片
   GET_LIST: "api/getList", // 获取图片列表
   GET_INFO: "api/getInfo", // 获取图片详情
+  GET_WEBINFO: "api/getWebInfo", // 获取网站信息
+  GET_BING: "api/getBing", // 获取随机图片
+  GET_RANDOM_INFO: "api/getRandomInfo", // 获取随机数据信息
 };
 
 module.exports = {
@@ -142,124 +144,92 @@ npm run dev
 
 
 
-### 接口文档
+# 🖼️ QWQ 图片 API 接口文档
 
-##### GET_IMAGE 获取当天图片
+**Base URL:** `https://qwq.gs/api`
 
-请求方法: `GET`
+---
 
-默认地址: `http://localhost:3000/api/getImage` 
+## 1. 获取今日图片
+直接重定向或返回当天的图片资源。可直接用于 `<img>` 标签的 `src` 属性。
 
-参数(query): 无。
+- **请求地址**: `/getImage`
+- **请求方法**: `GET`
+- **请求参数**: 无
+- **示例**: 
+  `https://qwq.gs/api/getImage`
 
-请求示例:
+---
 
-```
-http://localhost:3000/api/getImage
-```
+## 2. 获取图片列表
+支持分页查询历史图片数据。
 
-返回示例: 直接返回当天图片，可直接用作图片URL。
+- **请求地址**: `/getList`
+- **请求方法**: `GET`
+- **请求参数**:
 
+| 参数名 | 类型 | 说明 | 示例 |
+| :--- | :--- | :--- | :--- |
+| `pageSize` | Number | 每页数据条数 | 10 |
+| `currentPage` | Number | 当前目标页码 | 1 |
 
-
-##### GET_LIST 获取图片列表
-
-请求方法: `GET`
-
-默认地址: `http://localhost:3000/api/getList` 
-
-参数(query):
-
-| Key         | Value  | 说明         |
-| ----------- | ------ | ------------ |
-| pageSize    | Number | 每页数据条数 |
-| currentPage | Number | 目标页数     |
-
-请求示例:
-
-```
-http://localhost:3000/api/getList?pageSize=3&currentPage=2
-```
-
-返回示例:
-
-```javascript
+- **返回示例**:
+```json
 {
     "totle": 10,
     "list": [
         {
             "id": 7,
-            "title": "亚伯拉罕湖中的树，加拿大艾伯塔 (© Coolbiere/Getty Images)",
+            "title": "亚伯拉罕湖中的树 (© Getty Images)",
             "date": "2021-04-15",
-            "base64": "data:image/jpeg;base64,/9j/4AAQSkZJ...",
             "url": {
-                "hd": "http://localhost:3000/img/2021/04/15/2021-04-15_hd.jpg",
-                "uhd": "http://localhost:3000/img/2021/04/15/2021-04-15_uhd.jpg",
-                "gaussian": "http://localhost:3000/img/2021/04/15/2021-04-15_hd_gaussian_20.jpg",
-                "greyscale": "http://localhost:3000/img/2021/04/15/2021-04-15_hd_greyscale.jpg",
-                "thumbnail": "http://localhost:3000/img/2021/04/15/2021-04-15_hd_thumbnail_480_270.jpg"
+                "hd": "https://qwq.gs/img/...",
+                "uhd": "https://qwq.gs/img/...",
+                "thumbnail": "https://qwq.gs/img/..."
             },
             "color": {
-                "Muted": "#5182ac",
                 "Vibrant": "#24a3c8",
-                "DarkMuted": "#314257",
-                "LightMuted": "#93aecb",
-                "DarkVibrant": "#115d7b",
-                "LightVibrant": "#7ec2de"
+                "Muted": "#5182ac"
             },
             "timestamp": "2021-04-15T08:34:50.000Z"
-        },
-        // more...
+        }
     ]
 }
 ```
 
+---
 
+## 3. 获取图片详情
+通过图片 ID 获取指定图片的详细元数据。
 
-##### GET_INFO 获取图片详情
+- **请求地址**: `/getInfo`
+- **请求方法**: `GET`
+- **请求参数**:
 
-请求方法: `GET`
+| 参数名 | 类型 | 说明 | 示例 |
+| :--- | :--- | :--- | :--- |
+| `id` | Number | 数据唯一 ID | 1 |
 
-默认地址: `http://localhost:3000/api/getInfo` 
-
-参数(query):
-
-| Key  | Value  | 说明   |
-| ---- | ------ | ------ |
-| id   | Number | 数据ID |
-
-请求示例:
-
-```
-http://localhost:3000/api/getInfo?id=1
-```
-
-返回示例:
-
-```javascript
+- **返回示例**:
+```json
 {
     "info": {
         "id": 1,
-        "title": "塞勒斯堡的玉米迷宫，宾夕法尼亚州，美国 (© Alex Potemkin/Getty Images)",
+        "title": "塞勒斯堡的玉米迷宫 (© Getty Images)",
         "date": "2023-10-23",
-        "base64": "data:image/jpeg;base64,/9j/4AAQSk...",
+        "base64": "data:image/jpeg;base64,...",
         "url": {
             "hd": "/img/2023/10/23/2023-10-23_hd.jpg",
             "uhd": "/img/2023/10/23/2023-10-23_uhd.jpg",
-            "greyscale": "/img/2023/10/23/2023-10-23_hd_greyscale.jpg",
-            "thumbnail": "/img/2023/10/23/2023-10-23_hd_thumbnail_480_270.jpg",
-            "gaussian": "/img/2023/10/23/2023-10-23_hd_gaussian_20.jpg"
-        },
-        "color": {
-            "Vibrant": "#dd9413",
-            "DarkVibrant": "#70600e",
-            "LightVibrant": "#e9c36b",
-            "Muted": "#3c6c4c",
-            "DarkMuted": "#4e4c32",
-            "LightMuted": "#856314"
-        },
-        "timestamp": "2023-10-23T01:09:30.000Z"
+            "thumbnail": "/img/2023/10/23/2023-10-23_hd_thumbnail.jpg"
+        }
     }
 }
 ```
 
+---
+
+### 📝 说明
+1. **图片地址**: 详情接口返回的 `url` 若为相对路径（如 `/img/...`），需自行拼接前缀 `https://qwq.gs`。
+2. **颜色提取**: `color` 字段包含了图片调色板信息，可用于 UI 适配。
+3. **Base64**: `base64` 字段可用于在图片加载完成前的占位展示。

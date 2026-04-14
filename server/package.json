@@ -1,7 +1,7 @@
 {
   "name": "bing-serve",
   "version": "1.0.0",
-  "description": "### 使用 node.js 构建的必应每日一图服务端",
+  "description": "必应每日一图服务端",
   "main": "index.js",
   "scripts": {
     "serve": "node index.js",

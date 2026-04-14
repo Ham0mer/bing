@@ -24,22 +24,18 @@ const databaseConfig = {
 const infoConfig = {
   link: [
     {
-      label: "白馬空谷的主页", // 链接名称
-      url: "https://www.mcloc.cn/" // 链接地址
+      label: "必应每日一图", // 链接名称
+      url: "https://bing.com/" // 链接地址
     },
     {
-      label: "白馬空谷的博客",
-      url: "https://blog.mcloc.cn/"
+      label: "必应每日一图",
+      url: "https://bing.com/"
     }
   ],
-  copyright: `Copyright © 2020-2024 mcloc.cn@白馬空谷`, // 版权信息
+  copyright: `Copyright © 2020-2026`, // 版权信息
   htmlSlot: {
     beforeFooter: ``, // 页脚上方HTML插槽
-    afterFooter: `<a style="margin-right: 10px;" target="_blank" href="https://beian.miit.gov.cn/">晋ICP备20001086号-1</a>
-  <a style="margin-right: 10px; display: flex; align-items: center;" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41080202000141">
-    <img style="width: 14px; margin-right: 6px;" src="https://www.mcloc.cn/wp-content/uploads/2020/04/beiantubiao-19.png"/>
-    <span>豫公网安备 41080202000141号</span>
-  </a>` // 页脚下方HTML插槽
+    afterFooter: `` // 页脚下方HTML插槽
   }
 }
 

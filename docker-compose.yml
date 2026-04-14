@@ -1,0 +1,18 @@
+services:
+  bing:
+    image: ghcr.io/ham0mer/bing:main
+    container_name: bing
+    restart: unless-stopped
+    ports:
+      - "2333:3000"
+    volumes:
+      - ./data:/usr/src/app/data
+    networks:
+      - bing-img
+    environment:
+      - TZ=Asia/Shanghai
+
+networks:
+  bing-img:
+    name: bing-img
+    driver: bridge
